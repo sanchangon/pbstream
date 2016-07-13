@@ -35,3 +35,6 @@ v.out.ogr input=vriver_aw3d@PERMANENT type=line output=C:\Workspace\Stream_Netwo
 v.out.ogr input=vriver_fusion@PERMANENT type=line output=C:\Workspace\Stream_Network_ACRS2016\New format=ESRI_Shapefile
 v.out.ogr input=vriver_moac@PERMANENT type=line output=C:\Workspace\Stream_Network_ACRS2016\New format=ESRI_Shapefile
 v.out.ogr input=vriver_srtm@PERMANENT type=line output=C:\Workspace\Stream_Network_ACRS2016\New format=ESRI_Shapefile
+
+# r.mapcalc fusion DEMs
+if( ref.moac.geomorphons@PERMANENT <=2 , fill.aw3d@PERMANENT ,if( ref.moac.geomorphons@PERMANENT <=5, fill.srtm@PERMANENT ,if( ref.moac.geomorphons@PERMANENT ==8, fill.srtm@PERMANENT , fill.aster@PERMANENT ) ) )
