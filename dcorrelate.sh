@@ -21,8 +21,10 @@ g.region rast=fill.srtm ras=30 -p
 
 # d.correlate for version 6
 g.region rast=lsat7_2002_20
-d.correlate -t layer1=lsat7_2002_20 layer2=lsat7_2002_30 --verbose 
+d.correlate -t layer1=lsat7_2002_20 layer2=lsat7_2002_30 --verbose
 
 # d.correlate for version 7
 g.region raster=lsat7_2002_30 -p
 d.correlate map=lsat7_2002_30,lsat7_2002_40
+
+# d.correlate for ACRS-2016 Project
