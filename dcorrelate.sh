@@ -27,4 +27,30 @@ d.correlate -t layer1=lsat7_2002_20 layer2=lsat7_2002_30 --verbose
 g.region raster=lsat7_2002_30 -p
 d.correlate map=lsat7_2002_30,lsat7_2002_40
 
-# d.correlate for ACRS-2016 Project
+# correlation dems for ACRS-2016 Project
+# set region
+g.region rast=ref.moac.fill -p
+
+# get raster layers
+g.list type=rast
+----------------------------------------------
+raster files available in mapset <PERMANENT>:
+fill.aster      fill.srtm       raw.srtm        ref.moac.geomph voids.aw3d.fill
+fill.aw3d       raw.aster       ref.moac.5m     ref.moac.hshed  voids.focal
+fill.aw3d.2     raw.aw3d        ref.moac.fill   voids.aw3d      voids.mask
+----------------------------------------------
+
+# ref.moac.fill vs. fill.srtm ...
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+y = 0.991434*x + -1.713652
+R^2 = 0.999
+
+# ref.moac.fill vs. fill.aw3d.2 ...
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+y = 0.986666*x + -1.213760
+R^2 = 0.9991
+
+# ref.moac.fill vs. fill.aster ...
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+y = 0.984966*x + 8.555335
+R^2 = 0.9981
