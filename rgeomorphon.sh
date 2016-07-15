@@ -43,5 +43,5 @@ r.geomorphon complete.
 (Fri Jul 15 11:07:13 2016) Command finished (18 min 58 sec)
 
 # trial 4 -> increate window size = 70 and -m and change to ref.moac.fill
-# trial 4 -> It's work !!!
+# trial 4 -> It's work !!!!
 r.geomorphon -m --overwrite elevation=ref.moac.fill@PERMANENT forms=ref.moac.geomph search=70 skip=0 flat=1 dist=0
