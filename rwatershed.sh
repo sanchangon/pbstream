@@ -39,11 +39,11 @@ v.out.ogr input=vriver_srtm@PERMANENT type=line output=C:\Workspace\Stream_Netwo
 # r.mapcalc fusion DEMs
 if( ref.moac.geomorphons@PERMANENT <=2 , fill.aw3d@PERMANENT ,if( ref.moac.geomorphons@PERMANENT <=5, fill.srtm@PERMANENT ,if( ref.moac.geomorphons@PERMANENT ==8, fill.srtm@PERMANENT , fill.aster@PERMANENT ) ) )
 
-# fill voids using moving windows method                                                    
-r.neighbors input=raw.srtm@PERMANENT output=fill.srtm size=3 method=average                                                                
-r.neighbors input=raw.aster@PERMANENT output=fill.aster size=3 method=average                                                                 
-r.neighbors input=raw.aw3d@PERMANENT output=fill.aw3d size=3 method=average                  
-  
+# fill voids using moving windows method
+r.neighbors input=raw.srtm@PERMANENT output=fill.srtm size=3 method=average
+r.neighbors input=raw.aster@PERMANENT output=fill.aster size=3 method=average
+r.neighbors input=raw.aw3d@PERMANENT output=fill.aw3d size=3 method=average
+
 r.mapcalc --overwrite expression=voids.mask = if( fill.aw3d@PERMANENT < 1,1,null())
 #r.mapcalc --overwrite expression=voids.mask = if( raw.aw3d@PERMANENT <= 0,1,null())
 #r.mapcalc --overwrite expression=voids.mask = if( fill.aw3d@PERMANENT   <= 0,1,null())
@@ -53,8 +53,8 @@ r.mapcalc --overwrite expression=voids.mask = if( fill.aw3d@PERMANENT < 1,1,null
 r.mask raster=voids.mask@PERMANENT
 r.neighbors --overwrite input=fill.srtm@PERMANENT output=voids.focal size=3 method=average 
 #r.neighbors --overwrite input=fill.srtm@PERMANENT output=voids.focal5 size=5 method=average
-r.mask -r raster=voids.mask@PERMANENT                                           
 #Raster MASK removed
+r.mask -r raster=voids.mask@PERMANENT
 
 r.mapcalc --overwrite expression=voids.aw3d = if( fill.aw3d@PERMANENT <1, voids.focal@PERMANENT, fill.aw3d@PERMANENT )
 r.fill.dir --overwrite input=voids.aw3d@PERMANENT output=voids.aw3d.fill direction=voids.aw3d.dir
