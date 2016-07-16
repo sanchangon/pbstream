@@ -92,8 +92,8 @@ g.region -p rast=ref.moac.geomph@PERMANENT
 # split geomorphon raster
 # 1. flat
 r.mapcalc 'geomph.flat = if( ref.moac.geomph@PERMANENT == 1,1, null() )'
-r.mask -o input=geomph.flat@PERMANENT
 g.list type=rast
+r.mask -o input=geomph.flat@PERMANENT
 # moac vs srtm in flat area
 d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
 ref.moac.fill vs. fill.srtm ...
@@ -114,8 +114,8 @@ r.mask -r input=geomph.flat@PERMANENT
 
 # 2. summit
 r.mapcalc 'geomph.summit = if( ref.moac.geomph@PERMANENT == 2,1, null() )'
-r.mask -o input=geomph.summit@PERMANENT
 g.list type=rast
+r.mask -o input=geomph.summit@PERMANENT
 # moac vs srtm in summit area
 d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
 ref.moac.fill vs. fill.srtm ...
@@ -132,3 +132,26 @@ ref.moac.fill vs. fill.aster ...
 y = 0.999650*x + 11.836692
 R^2 = 0.9988
 # remove mask flat area
+r.mask -r input=geomph.summit@PERMANENT
+
+# 3.ridge
+r.mapcalc 'geomph.ridge = if( ref.moac.geomph@PERMANENT == 3,1, null() )'
+g.list type=rast
+r.mask -o input=geomph.ridge@PERMANENT
+# moac vs srtm in ridge area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 1.000774*x + 0.513694
+R^2 = 0.9994
+# moac vs aw3d in ridge area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.994215*x + 0.716029
+R^2 = 0.9996
+# moac vs aster in ridge area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.996939*x + 10.316393
+R^2 = 0.9987
+# remove mask flat area
+r.mask -r input=geomph.ridge@PERMANENT
