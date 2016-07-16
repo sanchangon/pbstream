@@ -54,3 +54,34 @@ R^2 = 0.9991
 d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
 y = 0.984966*x + 8.555335
 R^2 = 0.9981
+
+# category geomorphon
+r.category --verbose map=ref.moac.geomph@PERMANENT
+1	flat
+2	summit
+3	ridge
+4	shoulder
+5	spur
+6	slope
+7	hollow
+8	footslope
+9	valley
+10	depression
+(Sat Jul 16 08:49:31 2016) Command finished (11 sec)
+
+# r.what
+r.what --v -f -n input=ref.moac.geomph@PERMANENT east_north=734167.785439,1868283.700603
+easting|northing|site_name|ref.moac.geomph@PERMANENT|ref.moac.geomph@PERMANENT_label
+734167.785439|1868283.700603||4|shoulder
+
+r.what --v -f -n input=ref.moac.geomph@PERMANENT east_north=726568.754080,1857016.171348
+easting|northing|site_name|ref.moac.geomph@PERMANENT|ref.moac.geomph@PERMANENT_label
+726568.754080|1857016.171348||5|spur
+
+r.what --v -f -n input=ref.moac.geomph@PERMANENT east_north=726027.020739,1854864.726897
+easting|northing|site_name|ref.moac.geomph@PERMANENT|ref.moac.geomph@PERMANENT_label
+726027.020739|1854864.726897||7|hollow
+
+r.what --v -f -n input=ref.moac.geomph@PERMANENT east_north=725896.278929,1855191.581422
+easting|northing|site_name|ref.moac.geomph@PERMANENT|ref.moac.geomph@PERMANENT_label
+725896.278929|1855191.581422||6|slope
