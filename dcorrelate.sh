@@ -155,3 +155,25 @@ y = 0.996939*x + 10.316393
 R^2 = 0.9987
 # remove mask flat area
 r.mask -r input=geomph.ridge@PERMANENT
+
+# 4.shoulder
+r.mapcalc 'geomph.shoulder = if( ref.moac.geomph@PERMANENT == 4,1, null() )'
+g.list type=rast
+r.mask -o input=geomph.shoulder@PERMANENT
+# moac vs srtm in shoulder area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 0.995996*x + -2.273020
+R^2 = 0.9993
+# moac vs aw3d in shoulder area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.991442*x + -0.820885
+R^2 = 0.9995
+# moac vs aster in shoulder area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.983802*x + 10.766851
+R^2 = 0.9955
+# remove mask flat area
+r.mask -r input=geomph.shoulder@PERMANENT
