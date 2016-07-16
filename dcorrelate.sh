@@ -85,3 +85,28 @@ easting|northing|site_name|ref.moac.geomph@PERMANENT|ref.moac.geomph@PERMANENT_l
 r.what --v -f -n input=ref.moac.geomph@PERMANENT east_north=725896.278929,1855191.581422
 easting|northing|site_name|ref.moac.geomph@PERMANENT|ref.moac.geomph@PERMANENT_label
 725896.278929|1855191.581422||6|slope
+
+# set region before split geomorphon raster
+g.region -p rast=ref.moac.geomph@PERMANENT
+
+# split geomorphon raster
+# 1. flat
+r.mapcalc 'geomph.flat = if( ref.moac.geomph@PERMANENT == 1,1, null() )'
+r.mask -o input=geomph.flat@PERMANENT
+# moac vs srtm in flat area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 0.995624*x + -2.057316
+R^2 = 0.9982
+# moac vs aw3d in flat area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.992291*x + -0.955425
+R^2 = 0.9988
+# moac vs aster in flat area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.975508*x + 12.809822
+R^2 = 0.9858
+# remove mask flat area
+r.mask -r input=geomph.flat@PERMANENT
