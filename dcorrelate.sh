@@ -199,3 +199,25 @@ y = 0.990803*x + 9.572100
 R^2 = 0.998
 # remove mask spur area
 r.mask -r input=geomph.spur@PERMANENT
+
+# 6.slope
+r.mapcalc 'geomph.slope = if( ref.moac.geomph@PERMANENT == 6,1, null() )'
+g.list type=rast
+r.mask -o input=geomph.slope@PERMANENT
+# moac vs srtm in slope area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 0.991114*x + -1.911971
+R^2 = 0.9989
+# moac vs aw3d in slope area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.987017*x + -1.745098
+R^2 = 0.9989
+# moac vs aster in slope area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.986098*x + 7.335755
+R^2 = 0.998
+# remove mask slope area
+r.mask -r input=geomph.slope@PERMANENT
