@@ -287,3 +287,25 @@ y = 0.973118*x + 5.639704
 R^2 = 0.9981
 # remove mask valley area
 r.mask -r input=geomph.valley@PERMANENT
+
+# 10.depression
+r.mapcalc 'geomph.depression = if( ref.moac.geomph@PERMANENT == 10,1, null() )'
+g.list type=rast
+r.mask -o input=geomph.depression@PERMANENT
+# moac vs srtm in depression area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 0.979261*x + -4.654645
+R^2 = 0.9992
+# moac vs aw3d in depression area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.975779*x + -3.458951
+R^2 = 0.9991
+# moac vs aster in depression area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.972184*x + 4.900387
+R^2 = 0.9983
+# remove mask depression area
+r.mask -r input=geomph.depression@PERMANENT
