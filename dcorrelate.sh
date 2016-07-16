@@ -131,7 +131,7 @@ d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
 ref.moac.fill vs. fill.aster ...
 y = 0.999650*x + 11.836692
 R^2 = 0.9988
-# remove mask flat area
+# remove mask summit area
 r.mask -r input=geomph.summit@PERMANENT
 
 # 3.ridge
@@ -153,7 +153,7 @@ d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
 ref.moac.fill vs. fill.aster ...
 y = 0.996939*x + 10.316393
 R^2 = 0.9987
-# remove mask flat area
+# remove mask ridge area
 r.mask -r input=geomph.ridge@PERMANENT
 
 # 4.shoulder
@@ -175,5 +175,27 @@ d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
 ref.moac.fill vs. fill.aster ...
 y = 0.983802*x + 10.766851
 R^2 = 0.9955
-# remove mask flat area
+# remove mask shoulder area
 r.mask -r input=geomph.shoulder@PERMANENT
+
+# 5.spur
+r.mapcalc 'geomph.spur = if( ref.moac.geomph@PERMANENT == 5,1, null() )'
+g.list type=rast
+r.mask -o input=geomph.spur@PERMANENT
+# moac vs srtm in spur area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 0.994515*x + 0.828669
+R^2 = 0.9989
+# moac vs aw3d in spur area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.990012*x + 0.197781
+R^2 = 0.9991
+# moac vs aster in spur area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.990803*x + 9.572100
+R^2 = 0.998
+# remove mask spur area
+r.mask -r input=geomph.spur@PERMANENT
