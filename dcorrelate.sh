@@ -265,3 +265,25 @@ y = 0.979866*x + 10.832234
 R^2 = 0.9967
 # remove mask footslope area
 r.mask -r input=geomph.footslope@PERMANENT
+
+# 9.valley
+r.mapcalc 'geomph.valley = if( ref.moac.geomph@PERMANENT == 9,1, null() )'
+g.list type=rast
+r.mask -o input=geomph.valley@PERMANENT
+# moac vs srtm in valley area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 0.980474*x + -3.783775
+R^2 = 0.999
+# moac vs aw3d in valley area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.976831*x + -2.879760
+R^2 = 0.999
+# moac vs aster in valley area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.973118*x + 5.639704
+R^2 = 0.9981
+# remove mask valley area
+r.mask -r input=geomph.valley@PERMANENT
