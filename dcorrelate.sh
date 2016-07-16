@@ -243,3 +243,25 @@ y = 0.982470*x + 4.370333
 R^2 = 0.9976
 # remove mask hollow area
 r.mask -r input=geomph.hollow@PERMANENT
+
+# 8.footslope
+r.mapcalc 'geomph.footslope = if( ref.moac.geomph@PERMANENT == 8,1, null() )'
+g.list type=rast
+r.mask -o input=geomph.footslope@PERMANENT
+# moac vs srtm in footslope area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 0.989632*x + -1.990835
+R^2 = 0.9993
+# moac vs aw3d in footslope area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.986778*x + -0.798791
+R^2 = 0.9994
+# moac vs aster in footslope area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.979866*x + 10.832234
+R^2 = 0.9967
+# remove mask footslope area
+r.mask -r input=geomph.footslope@PERMANENT
