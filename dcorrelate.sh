@@ -93,6 +93,7 @@ g.region -p rast=ref.moac.geomph@PERMANENT
 # 1. flat
 r.mapcalc 'geomph.flat = if( ref.moac.geomph@PERMANENT == 1,1, null() )'
 r.mask -o input=geomph.flat@PERMANENT
+g.list type=rast
 # moac vs srtm in flat area
 d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
 ref.moac.fill vs. fill.srtm ...
@@ -110,3 +111,24 @@ y = 0.975508*x + 12.809822
 R^2 = 0.9858
 # remove mask flat area
 r.mask -r input=geomph.flat@PERMANENT
+
+# 2. summit
+r.mapcalc 'geomph.summit = if( ref.moac.geomph@PERMANENT == 2,1, null() )'
+r.mask -o input=geomph.summit@PERMANENT
+g.list type=rast
+# moac vs srtm in summit area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 1.002223*x + 1.888197
+R^2 = 0.9994
+# moac vs aw3d in summit area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.995570*x + 1.800926
+R^2 = 0.9996
+# moac vs aster in summit area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.999650*x + 11.836692
+R^2 = 0.9988
+# remove mask flat area
