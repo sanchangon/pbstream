@@ -221,3 +221,25 @@ y = 0.986098*x + 7.335755
 R^2 = 0.998
 # remove mask slope area
 r.mask -r input=geomph.slope@PERMANENT
+
+# 7.hollow
+r.mapcalc 'geomph.hollow = if( ref.moac.geomph@PERMANENT == 7,1, null() )'
+g.list type=rast
+r.mask -o input=geomph.hollow@PERMANENT
+# moac vs srtm in hollow area
+d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+ref.moac.fill vs. fill.srtm ...
+y = 0.987677*x + -3.895778
+R^2 = 0.9987
+# moac vs aw3d in hollow area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
+ref.moac.fill vs. fill.aw3d.2 ...
+y = 0.984352*x + -3.789072
+R^2 = 0.9988
+# moac vs aster in hollow area
+d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
+ref.moac.fill vs. fill.aster ...
+y = 0.982470*x + 4.370333
+R^2 = 0.9976
+# remove mask hollow area
+r.mask -r input=geomph.hollow@PERMANENT
