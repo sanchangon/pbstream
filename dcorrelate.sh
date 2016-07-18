@@ -6,6 +6,7 @@
 # MIT@License
 # github : https://github.com/sanchangon
 #-------------------------------------------------------------------------------
+# Examples Correlation in GRASS GIS 6.x and & 7.x
 # Using Correlation in GRASS GIS 6.x and & 7.x
 # Reference
 https://grass.osgeo.org/grass73/manuals/d.mon.html
@@ -26,7 +27,7 @@ d.correlate -t layer1=lsat7_2002_20 layer2=lsat7_2002_30 --verbose
 # d.correlate for version 7
 g.region raster=lsat7_2002_30 -p
 d.correlate map=lsat7_2002_30,lsat7_2002_40
-
+#-------------------------------------------------------------------------------
 # correlation dems for ACRS-2016 Project
 # set region
 g.region rast=ref.moac.fill -p
