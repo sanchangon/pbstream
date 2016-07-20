@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Chingchai Humhong
+# Mr Chingchai Humhong
 # Assoc Prof Dr Chada Narongrit
 # 15/07/2016
 # chada@nu.ac.th, chingchai.h@gmail.com, chingchaih@nu.ac.th
