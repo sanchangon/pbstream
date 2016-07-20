@@ -1,7 +1,8 @@
 #-------------------------------------------------------------------------------
-# chingchai humhong (chingchai sanchangon)
+# Mr Chingchai Humhong
+# Assoc Prof Dr Chada Narongrit
 # 20/07/2016
-# chingchai.h@gmail.com, chingchaih@nu.ac.th
+# chada@nu.ac.th, chingchai.h@gmail.com, chingchaih@nu.ac.th
 # GISTNU @ Naresuan University
 # MIT@License
 # github : https://github.com/sanchangon
@@ -24,4 +25,21 @@ cells:      242497092
 
 # Calculate BIAS = avg[DEM(i) - DEM(ref)] form H.I.Reuter et al.
 # bias srtm
-r.mapcalc bais.srtm = ( fill.srtm@PERMANENT -  ref.moac.fill@PERMANENT ) / 2
+r.mapcalc 'bias.srtm = ( fill.srtm@PERMANENT -  ref.moac.fill@PERMANENT ) / 2'
+
+# bias aw3d
+r.mapcalc 'bias.aw3d = ( fill.aw3d.2@PERMANENT -  ref.moac.fill@PERMANENT ) / 2'
+
+# bias aster
+r.mapcalc 'bias.aster = ( fill.aster@PERMANENT -  ref.moac.fill@PERMANENT ) / 2'
+
+#Calculate Absolute BIAS = |avg[DEM(i) - DEM(ref)]| form H.I.Reuter et al.
+# abs bias 3 DEMs (สองสูตรนี้มีค่าเท่ากัน)
+r.mapcalc 'abs.bias.srtm = abs(bias.srtm@PERMANENT)'
+r.mapcalc 'abs2.bias.srtm = abs( ( fill.srtm@PERMANENT -  ref.moac.fill@PERMANENT ) /2)'
+
+r.mapcalc 'abs.bias.aw3d = abs(bias.aw3d@PERMANENT)'
+r.mapcalc 'abs2.bias.srtm = abs( ( fill.aw3d.2@PERMANENT -  ref.moac.fill@PERMANENT ) /2)'
+
+r.mapcalc 'abs.bias.aster = abs(bias.aster@PERMANENT)'
+r.mapcalc 'abs2.bias.srtm = abs( ( fill.aster@PERMANENT -  ref.moac.fill@PERMANENT ) /2)'
