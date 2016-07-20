@@ -41,7 +41,7 @@ r.mapcalc 'bias.moac = ( ref.moac.fill@PERMANENT -  ref.moac.fill@PERMANENT )'
 r.mapcalc 'bias.moac = ( ref.moac.fill@PERMANENT -  ref.moac.fill@PERMANENT ) / 2'
 
 
-#Calculate Absolute BIAS = |[DEM(i) - DEM(ref)]| form H.I.Reuter et al. แบบไใ้ใช้ค่า avg
+#Calculate Absolute BIAS = |[DEM(i) - DEM(ref)]| form H.I.Reuter et al. (not avg)
 # abs bias 3 DEMs (3 สูตรนี้มีค่าเท่ากัน)
 r.mapcalc 'abs.bias.srtm = abs(bias.srtm@PERMANENT)'
 r.mapcalc 'abs.bias.srtm2 = abs( ( fill.srtm@PERMANENT -  ref.moac.fill@PERMANENT ) )'
@@ -84,4 +84,41 @@ r.info map=abs.bias.aster@PERMANENT
 r.recode input=abs.bias.aster@PERMANENT output=abs.bias.aster.int rules=/home/user/grassdata/acrs_demfuse/PERMANENT/.tmp/osgeolive/2153.0 #0:189.111111111111:0:189
 
 # r.statistics
-r.statistics -c base=ref.moac.geomph@PERMANENT cover=abs.bias.srtm.int@PERMANENT method=average output=stats.abs.bias.srtm
+r.statistics --overwrite base=ref.moac.geomph@PERMANENT cover=abs.bias.srtm.int@PERMANENT method=average output=stats.abs.bias.srtm
+r.category map=stats.abs.bias.srtm2@PERMANENT
+1	2.3050078763
+2	5.2560268929
+3	4.8124966217
+4	2.5891745374
+5	6.6127901138
+6	8.6044042386
+7	10.7244144078
+8	3.3386291129
+9	12.0751338477
+10	12.7927413653
+
+r.statistics --overwrite base=ref.moac.geomph@PERMANENT cover=abs.bias.aw3d.int@PERMANENT method=average output=stats.abs.bias.aw3d
+r.category map=stats.abs.bias.aw3d@PERMANENT
+1	1.5920594356
+2	3.6239292701
+3	4.0433778401
+4	1.7815614542
+5	6.8894832724
+6	9.3697542367
+7	11.8657899147
+8	2.5166445169
+9	12.6809300515
+10	12.9249799316
+
+r.statistics --overwrite base=ref.moac.geomph@PERMANENT cover=abs.bias.aster.int@PERMANENT method=average output=stats.abs.bias.aster
+r.category map=stats.abs.bias.aster@PERMANENT
+1	9.3622055829
+2	12.2327682398
+3	10.4880537925
+4	8.2690860059
+5	10.363892361
+6	10.5676087342
+7	11.0973760283
+8	7.917812315
+9	10.9755538247
+10	10.6795919344
