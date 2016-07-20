@@ -24,3 +24,4 @@ cells:      242497092
 
 # Calculate BIAS = avg[DEM(i) - DEM(ref)] form H.I.Reuter et al.
 # bias srtm
+r.mapcalc bais.srtm = ( fill.srtm@PERMANENT -  ref.moac.fill@PERMANENT ) / 2
