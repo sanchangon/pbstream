@@ -1,7 +1,8 @@
 #-------------------------------------------------------------------------------
-# chingchai humhong (chingchai sanchangon)
+# Chingchai Humhong
+# Assoc Prof Dr Chada Narongrit
 # 13/07/2016
-# chingchai.h@gmail.com, chingchaih@nu.ac.th
+# chada@nu.ac.th, chingchai.h@gmail.com, chingchaih@nu.ac.th
 # GISTNU @ Naresuan University
 # MIT@License
 # github : https://github.com/sanchangon
@@ -51,7 +52,7 @@ r.mapcalc --overwrite expression=voids.mask = if( fill.aw3d@PERMANENT < 1,1,null
 #r.mapcalc --overwrite expression=voids.mask = if( fill.aw3d@PERMANENT > -1,1,0 )| if( fill.aw3d@PERMANENT < 0,1,null())
 
 r.mask raster=voids.mask@PERMANENT
-r.neighbors --overwrite input=fill.srtm@PERMANENT output=voids.focal size=3 method=average 
+r.neighbors --overwrite input=fill.srtm@PERMANENT output=voids.focal size=3 method=average
 #r.neighbors --overwrite input=fill.srtm@PERMANENT output=voids.focal5 size=5 method=average
 #Raster MASK removed
 r.mask -r raster=voids.mask@PERMANENT

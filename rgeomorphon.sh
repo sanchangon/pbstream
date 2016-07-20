@@ -1,7 +1,8 @@
 #-------------------------------------------------------------------------------
-# chingchai humhong (chingchai sanchangon)
+# Chingchai Humhong
+# Assoc Prof Dr Chada Narongrit
 # 15/07/2016
-# chingchai.h@gmail.com, chingchaih@nu.ac.th
+# chada@nu.ac.th, chingchai.h@gmail.com, chingchaih@nu.ac.th
 # GISTNU @ Naresuan University
 # MIT@License
 # github : https://github.com/sanchangon
