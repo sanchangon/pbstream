@@ -43,19 +43,32 @@ fill.aw3d.2     raw.aw3d        ref.moac.fill   voids.aw3d      voids.mask
 ----------------------------------------------
 
 # ref.moac.fill vs. fill.srtm ...
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-y = 0.991434*x + -1.713652
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 1.007587*x + 2.219408
 R^2 = 0.999
 
 # ref.moac.fill vs. fill.aw3d.2 ...
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-y = 0.986666*x + -1.213760
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.012558*x + 1.675751
 R^2 = 0.9991
 
 # ref.moac.fill vs. fill.aster ...
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-y = 0.984966*x + 8.555335
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.013336*x + -7.788086
 R^2 = 0.9981
+
+# ref.moac.fill vs. fuse.f3 ...
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.009715*x + 0.144217
+R^2 = 0.999
 
 # category geomorphon
 r.category --verbose map=ref.moac.geomph@PERMANENT
