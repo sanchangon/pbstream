@@ -97,20 +97,53 @@ r.mapcalc 'geomph.flat = if( ref.moac.geomph@PERMANENT == 1,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.flat@PERMANENT
 # moac vs srtm in flat area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 0.995624*x + -2.057316
+#d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 1.002614*x + 2.323541
 R^2 = 0.9982
+
 # moac vs aw3d in flat area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.992291*x + -0.955425
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.006579*x + 1.134612
 R^2 = 0.9988
+
 # moac vs aster in flat area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.975508*x + 12.809822
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.010499*x + -11.022972
 R^2 = 0.9858
+
+# moac vs fuse in flat area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.005153*x + 1.038004
+R^2 = 0.9988
+
+# univar
+r.univar map=ref.moac.fill
+ 100%
+total null and non-null cells: 242497092
+total null cells: 229656040
+
+Of the non-null cells:
+----------------------
+n: 12841052
+minimum: 111
+maximum: 1073
+range: 962
+mean: 144.342
+mean of absolute values: 144.342
+standard deviation: 44.736
+variance: 2001.31
+variation coefficient: 30.993 %
+sum: 1853505923.27773
+
 # remove mask flat area
 r.mask -r input=geomph.flat@PERMANENT
 
@@ -119,20 +152,33 @@ r.mapcalc 'geomph.summit = if( ref.moac.geomph@PERMANENT == 2,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.summit@PERMANENT
 # moac vs srtm in summit area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 1.002223*x + 1.888197
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 0.997232*x + -1.620482
 R^2 = 0.9994
+
 # moac vs aw3d in summit area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.995570*x + 1.800926
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.004042*x + -1.613523
 R^2 = 0.9996
+
 # moac vs aster in summit area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.999650*x + 11.836692
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 0.999167*x + -11.273721
 R^2 = 0.9988
+
+# moac vs fuse in summit area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.001319*x + -3.234218
+R^2 = 0.9995
+
 # remove mask summit area
 r.mask -r input=geomph.summit@PERMANENT
 
@@ -141,42 +187,69 @@ r.mapcalc 'geomph.ridge = if( ref.moac.geomph@PERMANENT == 3,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.ridge@PERMANENT
 # moac vs srtm in ridge area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 1.000774*x + 0.513694
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 0.998644*x + -0.240522
 R^2 = 0.9994
+
 # moac vs aw3d in ridge area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.994215*x + 0.716029
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.005380*x + -0.514783
 R^2 = 0.9996
+
 # moac vs aster in ridge area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.996939*x + 10.316393
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.001777*x + -9.742714
 R^2 = 0.9987
+
+# moac vs fuse in ridge area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.002218*x + -2.084309
+R^2 = 0.9995
+
 # remove mask ridge area
 r.mask -r input=geomph.ridge@PERMANENT
+
 
 # 4.shoulder
 r.mapcalc 'geomph.shoulder = if( ref.moac.geomph@PERMANENT == 4,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.shoulder@PERMANENT
 # moac vs srtm in shoulder area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 0.995996*x + -2.273020
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 1.003296*x + 2.400524
 R^2 = 0.9993
+
 # moac vs aw3d in shoulder area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.991442*x + -0.820885
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.008112*x + 0.912976
 R^2 = 0.9995
+
 # moac vs aster in shoulder area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.983802*x + 10.766851
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.011893*x + -10.196805
 R^2 = 0.9955
+
+# moac vs fuse in shoulder area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.005511*x + 0.399599
+R^2 = 0.9992
+
 # remove mask shoulder area
 r.mask -r input=geomph.shoulder@PERMANENT
 
@@ -185,20 +258,33 @@ r.mapcalc 'geomph.spur = if( ref.moac.geomph@PERMANENT == 5,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.spur@PERMANENT
 # moac vs srtm in spur area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 0.994515*x + 0.828669
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 1.004443*x + -0.264995
 R^2 = 0.9989
+
 # moac vs aw3d in spur area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.990012*x + 0.197781
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.009151*x + 0.297011
 R^2 = 0.9991
+
 # moac vs aster in spur area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.990803*x + 9.572100
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.007219*x + -8.567815
 R^2 = 0.998
+
+# moac vs fuse in spur area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.006805*x + -2.072046
+R^2 = 0.999
+
 # remove mask spur area
 r.mask -r input=geomph.spur@PERMANENT
 
@@ -207,20 +293,33 @@ r.mapcalc 'geomph.slope = if( ref.moac.geomph@PERMANENT == 6,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.slope@PERMANENT
 # moac vs srtm in slope area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 0.991114*x + -1.911971
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 1.007807*x + 2.537252
 R^2 = 0.9989
+
 # moac vs aw3d in slope area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.987017*x + -1.745098
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.012056*x + 2.344627
 R^2 = 0.9989
+
 # moac vs aster in slope area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.986098*x + 7.335755
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.012025*x + -6.351047
 R^2 = 0.998
+
+# moac vs fuse in slope area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.010087*x + 0.117168
+R^2 = 0.9989
+
 # remove mask slope area
 r.mask -r input=geomph.slope@PERMANENT
 
@@ -229,20 +328,33 @@ r.mapcalc 'geomph.hollow = if( ref.moac.geomph@PERMANENT == 7,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.hollow@PERMANENT
 # moac vs srtm in hollow area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 0.987677*x + -3.895778
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 1.011177*x + 4.615022
 R^2 = 0.9987
+
 # moac vs aw3d in hollow area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.984352*x + -3.789072
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.014652*x + 4.491683
 R^2 = 0.9988
+
 # moac vs aster in hollow area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.982470*x + 4.370333
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.015392*x + -3.183889
 R^2 = 0.9976
+
+# moac vs fuse in hollow area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.013429*x + 2.262103
+R^2 = 0.9987
+
 # remove mask hollow area
 r.mask -r input=geomph.hollow@PERMANENT
 
@@ -251,20 +363,33 @@ r.mapcalc 'geomph.footslope = if( ref.moac.geomph@PERMANENT == 8,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.footslope@PERMANENT
 # moac vs srtm in footslope area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 0.989632*x + -1.990835
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 1.009797*x + 2.125480
 R^2 = 0.9993
+
 # moac vs aw3d in footslope area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.986778*x + -0.798791
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.012834*x + 0.904072
 R^2 = 0.9994
+
 # moac vs aster in footslope area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.979866*x + 10.832234
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.017129*x + -10.482978
 R^2 = 0.9967
+
+# moac vs fuse in footslope area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.010332*x + 0.036815
+R^2 = 0.9992
+
 # remove mask footslope area
 r.mask -r input=geomph.footslope@PERMANENT
 
@@ -273,20 +398,33 @@ r.mapcalc 'geomph.valley = if( ref.moac.geomph@PERMANENT == 9,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.valley@PERMANENT
 # moac vs srtm in valley area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 0.980474*x + -3.783775
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 1.018927*x + 4.287220
 R^2 = 0.999
+
 # moac vs aw3d in valley area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.976831*x + -2.879760
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.022689*x + 3.393999
 R^2 = 0.999
+
 # moac vs aster in valley area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.973118*x + 5.639704
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.025635*x + -4.933235
 R^2 = 0.9981
+
+# moac vs fuse in valley area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.022039*x + 1.219971
+R^2 = 0.9989
+
 # remove mask valley area
 r.mask -r input=geomph.valley@PERMANENT
 
@@ -295,19 +433,32 @@ r.mapcalc 'geomph.depression = if( ref.moac.geomph@PERMANENT == 10,1, null() )'
 g.list type=rast
 r.mask -o input=geomph.depression@PERMANENT
 # moac vs srtm in depression area
-d.correlate -t layer1=ref.moac.fill layer2=fill.srtm --verbose
-ref.moac.fill vs. fill.srtm ...
-y = 0.979261*x + -4.654645
+d.correlate -t layer1=fill.srtm layer2=ref.moac.fill --verbose
+fill.srtm vs. ref.moac.fill ...
+ 100%
+y = 1.020317*x + 5.098120
 R^2 = 0.9992
+
 # moac vs aw3d in depression area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aw3d.2 --verbose
-ref.moac.fill vs. fill.aw3d.2 ...
-y = 0.975779*x + -3.458951
+d.correlate -t layer1=fill.aw3d.2 layer2=ref.moac.fill --verbose
+fill.aw3d.2 vs. ref.moac.fill ...
+ 100%
+y = 1.023912*x + 3.909102
 R^2 = 0.9991
+
 # moac vs aster in depression area
-d.correlate -t layer1=ref.moac.fill layer2=fill.aster --verbose
-ref.moac.fill vs. fill.aster ...
-y = 0.972184*x + 4.900387
+d.correlate -t layer1=fill.aster layer2=ref.moac.fill --verbose
+fill.aster vs. ref.moac.fill ...
+ 100%
+y = 1.026876*x + -4.345930
 R^2 = 0.9983
+
+# moac vs fuse in depression area
+d.correlate -t layer1=fuse.f3 layer2=ref.moac.fill --verbose
+fuse.f3 vs. ref.moac.fill ...
+ 100%
+y = 1.023444*x + 1.777951
+R^2 = 0.9991
+
 # remove mask depression area
 r.mask -r input=geomph.depression@PERMANENT
