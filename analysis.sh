@@ -83,7 +83,7 @@ r.recode input=abs.bias.aw3d@PERMANENT output=abs.bias.aw3d.int rules=/home/user
 r.info map=abs.bias.aster@PERMANENT
 r.recode input=abs.bias.aster@PERMANENT output=abs.bias.aster.int rules=/home/user/grassdata/acrs_demfuse/PERMANENT/.tmp/osgeolive/2153.0 #0:189.111111111111:0:189
 
-# r.statistics
+# r.statistics dems
 r.statistics --overwrite base=ref.moac.geomph@PERMANENT cover=abs.bias.srtm.int@PERMANENT method=average output=stats.abs.bias.srtm
 r.category map=stats.abs.bias.srtm2@PERMANENT
 1	2.3050078763
