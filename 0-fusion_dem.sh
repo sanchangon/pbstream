@@ -58,3 +58,6 @@ r.roughness.vector elevation=aw3d_ave@PERMANENT slope=aw3d_ave.slope@PERMANENT a
 # ASTER GDEM
 g.region -p raster=gdem@PERMANENT
 r.roughness.vector elevation=gdem@PERMANENT slope=gdem.slope@PERMANENT aspect=gdem.aspect@PERMANENT strength=gdem.strength fisher=gdem.fisher
+
+r.scatterplot input=srtm,srtm.geomph output=scatterplot_res_120
+d.correlate map=srtm.slope,srtm
